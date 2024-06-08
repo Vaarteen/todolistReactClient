@@ -7,16 +7,21 @@ import Register from './components/Register';
 import Login from './components/Login';
 import Profile from './components/Profile';
 import PrivateRoute from './components/PrivateRoute';
+import Cookies from 'js-cookie';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   useEffect(() => {
     // Vérifier si l'utilisateur est authentifié
-    const token = localStorage.getItem('authToken');
+    const token = Cookies.get('authToken');
     setIsAuthenticated(!!token);
   }, []);
-  const handleLogout = () => {
-    localStorage.removeItem('authToken');
+  const handleLogout = async () => {
+    Cookies.remove('authToken');
+    // Appeler la route logout pour supprimer le cookie de session
+    await fetch('/api/auth/logout')
+      .then((res) => { return res.json() })
+      .then((data) => { console.log(data.message) });
     setIsAuthenticated(false);
   };
   return (

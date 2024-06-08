@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 function Login({ handleLogin }) {
     const navigate = useNavigate();
@@ -12,8 +13,8 @@ function Login({ handleLogin }) {
         try {
             // on vérifie que l’utilisateur existe et on récupère son JWT généré par le serveur
             const { data } = await axios.post('/api/auth/login', { username, password });
-            // On stocke le token dans le localStorage du client
-            localStorage.setItem('authToken', data.token);
+            // Créer un cookie de session pour contenir le JWT
+            Cookies.set('authToken', data.token);
             handleLogin(true);
             navigate('/profile');
         } catch (error) {

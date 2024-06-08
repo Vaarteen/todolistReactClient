@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Logout from './Logout';
 
-const Navbar = ({ isAuthenticated, handleLogout }) => {
+const Navbar = ({ isAuthenticated, handleLogin, handleLogout }) => {
     return (
         <nav>
             <ul>

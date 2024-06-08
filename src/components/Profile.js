@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Cookies from 'js-cookie';
+
 function Profile() {
     const [user, setUser] = useState(null);
     useEffect(() => {
         const fetchUser = async () => {
-            // On cherche le token dans le localStorage
-            const token = localStorage.getItem('authToken');
+            // On cherche le token dans le cookie
+            const token = Cookies.get('authToken');
             if (!token) return; // pas de token => pas connecté
             try {
                 // On récupère l'utilisateur en DB en passant le token dans

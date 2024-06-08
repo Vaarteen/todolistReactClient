@@ -6,6 +6,7 @@ import AddTask from './components/AddTask';
 import Register from './components/Register';
 import Login from './components/Login';
 import Profile from './components/Profile';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   return (
@@ -17,10 +18,10 @@ function App() {
         </header>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/addtask" element={<AddTask />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
+          <Route path="/addtask" element={<PrivateRoute><AddTask /></PrivateRoute>} />
         </Routes>
       </div>
     </Router>

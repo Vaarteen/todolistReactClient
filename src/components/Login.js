@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-function Login() {
+function Login({ handleLogin }) {
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -14,6 +14,7 @@ function Login() {
             const { data } = await axios.post('/api/auth/login', { username, password });
             // On stocke le token dans le localStorage du client
             localStorage.setItem('authToken', data.token);
+            handleLogin(true);
             navigate('/profile');
         } catch (error) {
             console.error(error);

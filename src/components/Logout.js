@@ -1,12 +1,6 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 
-function Logout() {
-    const navigate = useNavigate();
-    const handleLogout = () => {
-        localStorage.removeItem('authToken');
-        navigate('/login');
-    };
+function Logout({ handleLogout }) {
     return (
         <button onClick={handleLogout}>Déconnexion</button>
     );
